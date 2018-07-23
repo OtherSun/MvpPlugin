@@ -1,0 +1,16 @@
+package $package$;
+
+/**
+ * MVP的Presenter层
+ * Created by $your_name$ on $creat_time$.
+ */
+
+public interface $Contract_Name$ {
+
+    $View_Code$
+
+    $Presenter_Code$
+
+    $PresenterImpl_Code$
+
+}

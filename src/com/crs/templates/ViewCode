@@ -1,0 +1,6 @@
+    /**
+     * View层 接口
+     */
+    interface View {
+
+    }
