@@ -84,10 +84,11 @@ public class MvpDialog extends JDialog {
         dialog.setVisible(true);
     }
 
-    public void setSelectFolderPathText(String path) {
+    public MvpDialog setSelectFolderPathText(String path) {
         if (CheckNull.isNull(path))
-            return;
+            return this;
         mTextPanel.setText(path);
+        return this;
     }
 
     public String getEdContractName() {
@@ -102,16 +103,29 @@ public class MvpDialog extends JDialog {
         void onCreat(JDialog dialog, ActionEvent e);
     }
 
-    public void setOnSelectFolderListener(OnSelectFolderListener listener) {
+    public MvpDialog setOnSelectFolderListener(OnSelectFolderListener listener) {
         this.onSelectFolderListener = listener;
+        return this;
     }
 
     private OnSelectFolderListener onSelectFolderListener;
 
-    public void setOnCreatMvpFileListener(OnCreatMvpFileListener listener) {
+    public MvpDialog setOnCreatMvpFileListener(OnCreatMvpFileListener listener) {
         this.onCreatMvpFileListener = listener;
+        return this;
     }
 
     private OnCreatMvpFileListener onCreatMvpFileListener;
+
+    /**
+     * 显示或隐藏弹窗
+     *
+     * @param b 状态
+     */
+    public MvpDialog onShow(boolean b) {
+        setVisible(b);
+        return this;
+    }
+
 
 }

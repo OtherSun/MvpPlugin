@@ -62,11 +62,11 @@ public class MvpPlugin extends AnAction implements MvpDialog.OnSelectFolderListe
         } else {
             mVirtualFile = DataKeys.VIRTUAL_FILE.getData(mAnActionEvent.getDataContext());
             mSelectPath = CheckNull.isNotNull(mVirtualFile) ? mVirtualFile.getPath() : "";
-            mMvpDialog = new MvpDialog(mAnActionEvent);
-            mMvpDialog.setSelectFolderPathText(mSelectPath);
-            mMvpDialog.setOnSelectFolderListener(this);
-            mMvpDialog.setOnCreatMvpFileListener(this);
-            mMvpDialog.setVisible(true);
+            mMvpDialog = new MvpDialog(mAnActionEvent)
+                    .setSelectFolderPathText(mSelectPath)
+                    .setOnSelectFolderListener(this)
+                    .setOnCreatMvpFileListener(this)
+                    .onShow(true);
         }
 
 
