@@ -133,7 +133,7 @@ public class MvpPlugin extends AnAction implements MvpDialog.OnSelectFolderListe
                 .replace("$Presenter_Code$", presenterCode)
                 .replace("$PresenterImpl_Code$", presenterImplCode)
                 .replace("$Contract_Name$", mMvpDialog.getEdContractName());
-        File file = FileUtils.writetoFile(contractCode, mSelectPath, mMvpDialog.getEdContractName() + ".java");
+        FileUtils.writetoFile(contractCode, mSelectPath, mMvpDialog.getEdContractName() + ".java");
         mProject.getBaseDir().refresh(false, true);
     }
 
