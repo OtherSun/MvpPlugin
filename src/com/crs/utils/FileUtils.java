@@ -21,32 +21,31 @@ public class FileUtils {
         String content = "";
         try {
             byte[] bytes = readStream(in);
-            content = new String(bytes,"UTF-8");
-            System.out.println(new String(bytes,"UTF-8"));
+            content = new String(bytes, "UTF-8");
+            System.out.println(new String(bytes, "UTF-8"));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return content;
     }
 
-    public static void writetoFile(String content, String filepath, String filename) {
+    public static File writetoFile(String content, String filepath, String filename) {
+        File file = null;
         try {
             File floder = new File(filepath);
             // if file doesnt exists, then create it
             if (!floder.exists()) {
                 boolean mkdirs = floder.mkdirs();
                 if (!mkdirs)
-                    return;
+                    return null;
             }
-            File file = new File(filepath + "/" + filename);
+            file = new File(filepath + "/" + filename);
             if (!file.exists()) {
                 boolean newFile = file.createNewFile();
                 if (!newFile)
-                    return;
+                    return null;
             }
 
-//            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-//            BufferedWriter bw = new BufferedWriter(fw);
             OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file, false), "UTF-8");
             BufferedWriter bw = new BufferedWriter(osw);
             bw.write(content);
@@ -55,6 +54,7 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return file;
     }
 
     public static byte[] readStream(InputStream inStream) {
@@ -64,7 +64,7 @@ public class FileUtils {
             int len = -1;
             while ((len = inStream.read(buffer)) != -1) {
                 outSteam.write(buffer, 0, len);
-                System.out.println(new String(buffer,"UTF-8"));
+                System.out.println(new String(buffer, "UTF-8"));
             }
 
         } catch (IOException e) {

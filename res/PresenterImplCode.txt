@@ -1,0 +1,53 @@
+/**
+     * 网络层接口
+     */
+    final class PresenterImpl implements Presenter {
+
+        private View mView;
+        private FinalAjaxCallBack mSimple;
+
+        public PresenterImpl(View view) {
+            mView = view;
+            mSimple = new SimpleCallBack();
+        }
+
+        @Override
+        public void loadSimple() {
+//            XxxBusinessManager.simple(mView.getContext(), mView.getSimpleData, mSimple);
+        }
+
+        private final class SimpleCallBack extends FinalAjaxCallBack {
+
+            @Override
+            public void onStart() {
+                mView.showProgress();
+            }
+
+            @Override
+            public void onFailure(Throwable t, int errorNo, String strMsg) {
+                super.onFailure(t, errorNo, strMsg);
+                ToastUtil.failureLoading(mView.getContext(), t, errorNo, strMsg);
+//                mView.onFailSimple();
+            }
+
+            @Override
+            public void onSuccess(String t) {
+                super.onSuccess(t);
+/*                SimpleBean resultBean = SimpleParser.parseSimple(mView.getContext(), t);
+                if (Tools.isNotNull(resultBean)) {
+                    mView.onSuccessSimple(resultBean.Body.Data);
+                } else {
+                    mView.onFailSimple();
+                }*/
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                mView.hideProgress();
+            }
+
+        }
+
+
+    }

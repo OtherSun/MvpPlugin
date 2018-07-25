@@ -17,6 +17,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class MvpPlugin extends AnAction implements MvpDialog.OnSelectFolderListener, MvpDialog.OnCreatMvpFileListener {
@@ -43,6 +45,10 @@ public class MvpPlugin extends AnAction implements MvpDialog.OnSelectFolderListe
             if (psiClass != null && psiClass.getNameIdentifier() != null) {
                 String className = psiClass.getNameIdentifier().getText();
                 String selectedText = Messages.showInputDialog(mProject, "方法名", "请输入方法名", Messages.getInformationIcon());
+                if (CheckNull.isNull(selectedText)) {
+                    Messages.showMessageDialog(mProject, "方法名不能为空！", "警告", Messages.getWarningIcon());
+                    return;
+                }
                 String methodText = buildMethodText("", className, selectedText);
                 PsiMethod psiMethod = elementFactory.createMethodFromText(methodText, psiClass);
                 /*对文档进行操作部分代码，需要放入Runnable接口中实现,
@@ -117,12 +123,18 @@ public class MvpPlugin extends AnAction implements MvpDialog.OnSelectFolderListe
     public void onCreat(JDialog dialog, ActionEvent e) {
         String packageName = mSelectPath.substring(mSelectPath.indexOf("com"), mSelectPath.length()).replace("/", ".");
         String viewCode = FileUtils.readFile(this, "ViewCode.txt");
+        String creatTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(System.currentTimeMillis());
+        String presenterCode = FileUtils.readFile(this, "PresenterCode.txt");
+        String presenterImplCode = FileUtils.readFile(this, "PresenterImplCode.txt");
         String contractCode = FileUtils.readFile(this, "ContractCode.txt")
                 .replace("$package$", packageName)
+                .replace("$creat_time$", creatTime)
                 .replace("$View_Code$", viewCode)
+                .replace("$Presenter_Code$", presenterCode)
+                .replace("$PresenterImpl_Code$", presenterImplCode)
                 .replace("$Contract_Name$", mMvpDialog.getEdContractName());
-        FileUtils.writetoFile(contractCode, mSelectPath, mMvpDialog.getEdContractName() + ".java");
-        mProject.getBaseDir().refresh(false,true);
+        File file = FileUtils.writetoFile(contractCode, mSelectPath, mMvpDialog.getEdContractName() + ".java");
+        mProject.getBaseDir().refresh(false, true);
     }
 
 

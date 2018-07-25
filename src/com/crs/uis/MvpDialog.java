@@ -25,7 +25,7 @@ public class MvpDialog extends JDialog {
 
     public MvpDialog(AnActionEvent e) {
         setContentPane(contentPane);
-        getRootPane().setDefaultButton(buttonCancel);
+        getRootPane().setDefaultButton(buttonOK);
 
         mAnActionEvent = e;
         mProject = e.getProject();

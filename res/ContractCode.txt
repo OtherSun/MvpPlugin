@@ -2,7 +2,9 @@ package $package$;
 
 /**
  * MVP的Presenter层
- * Created by $your_name$ on $creat_time$.
+ *
+ * @author Risen_chen.
+ * @since $creat_time$
  */
 
 public interface $Contract_Name$ {

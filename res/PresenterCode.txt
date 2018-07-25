@@ -1,0 +1,13 @@
+/**
+     * Presenter 接口
+     */
+    interface Presenter {
+
+        /**
+         * 接口说明
+         *
+         * @see <href="接口说明链接">
+         */
+        void loadSimple();
+
+    }
