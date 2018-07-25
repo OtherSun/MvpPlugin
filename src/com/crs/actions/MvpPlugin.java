@@ -17,7 +17,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
