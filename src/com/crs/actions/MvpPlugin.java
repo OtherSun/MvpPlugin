@@ -17,6 +17,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -132,7 +133,7 @@ public class MvpPlugin extends AnAction implements MvpDialog.OnSelectFolderListe
                 .replace("$Presenter_Code$", presenterCode)
                 .replace("$PresenterImpl_Code$", presenterImplCode)
                 .replace("$Contract_Name$", mMvpDialog.getEdContractName());
-        FileUtils.writetoFile(contractCode, mSelectPath, mMvpDialog.getEdContractName() + ".java");
+       File file = FileUtils.writetoFile(contractCode, mSelectPath, mMvpDialog.getEdContractName() + ".java");
         mProject.getBaseDir().refresh(false, true);
     }
 
